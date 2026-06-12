@@ -1,0 +1,30 @@
+<fieldset>
+    <legend class="h6">{{ 'Accessibility'|t('nightingale') }}</legend>
+    <div class="meta">
+        <div class="nightingale-widget"
+             data-nightingale-widget
+             data-entry-url="{{ entryUrl }}"
+             data-axe-url="{{ axeUrl }}">
+            <div class="nightingale-widget__options">
+                <select data-nightingale-level class="nightingale-widget__select">
+                    <option value="a">WCAG A</option>
+                    <option value="aa" selected>WCAG AA</option>
+                    <option value="aaa">WCAG AAA</option>
+                </select>
+                <select data-nightingale-scope class="nightingale-widget__select">
+                    <option value="main">Content area</option>
+                    <option value="document">Whole page</option>
+                </select>
+                <label class="nightingale-widget__bp">
+                    <input type="checkbox" data-nightingale-best-practices checked>
+                    Best practices
+                </label>
+            </div>
+            <button type="button"
+                    class="btn small"
+                    data-nightingale-run>
+                Run Nightingale
+            </button>
+        </div>
+    </div>
+</fieldset>
