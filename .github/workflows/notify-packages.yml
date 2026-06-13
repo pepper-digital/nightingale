@@ -1,0 +1,18 @@
+name: Notify Packages
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Satis rebuild
+        run: |
+          curl -s -X POST \
+            -H "Authorization: token ${{ secrets.PACKAGES_DISPATCH_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/pepper-digital/packages/dispatches \
+            -d '{"event_type":"rebuild"}'
