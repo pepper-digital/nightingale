@@ -32,6 +32,7 @@
         "class": "pepperdigital\\nightingale\\Nightingale",
         "handle": "nightingale",
         "name": "Nightingale",
+        "changelogUrl": "https://raw.githubusercontent.com/pepper-digital/nightingale/main/CHANGELOG.md",
         "craftcms": {
             "name": "Nightingale",
             "developer": "Pepper Digital",
