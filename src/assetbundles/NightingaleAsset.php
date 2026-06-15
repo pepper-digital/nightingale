@@ -10,9 +10,9 @@ class NightingaleAsset extends AssetBundle
     public function init(): void
     {
         $this->sourcePath = __DIR__ . '/../web/assets';
-        $this->depends    = [CpAsset::class];
-        $this->js         = ['js/nightingale.js'];
-        $this->css        = ['css/nightingale.css'];
+        $this->depends = [CpAsset::class];
+        $this->js = ['js/nightingale.js'];
+        $this->css = ['css/nightingale.css'];
 
         parent::init();
     }

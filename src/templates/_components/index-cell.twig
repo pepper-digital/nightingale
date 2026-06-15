@@ -1,0 +1,12 @@
+{% if summary is null %}
+    <span class="nightingale-cell nightingale-cell--none">{{ '—'|t('nightingale') }}</span>
+{% elseif summary.isClean %}
+    <span class="nightingale-cell nightingale-cell--clean" title="{{ 'No issues at last audit'|t('nightingale') }}">
+        {{ 'Clean'|t('nightingale') }}
+    </span>
+{% else %}
+    <span class="nightingale-cell nightingale-cell--{{ summary.topImpact ?? 'minor' }}"
+          title="{{ 'Last audit: {n} issue(s)'|t('nightingale', { n: summary.violations }) }}">
+        {{ summary.violations }}
+    </span>
+{% endif %}

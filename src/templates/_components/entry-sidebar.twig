@@ -4,27 +4,44 @@
         <div class="nightingale-widget"
              data-nightingale-widget
              data-entry-url="{{ entryUrl }}"
-             data-axe-url="{{ axeUrl }}">
+             data-axe-url="{{ axeUrl }}"
+             data-content-selector="{{ settings.contentSelector }}"
+             data-store-url="{{ storeUrl }}"
+             data-element-id="{{ entry.id }}"
+             data-site-id="{{ entry.siteId }}">
             <div class="nightingale-widget__options">
                 <select data-nightingale-level class="nightingale-widget__select">
-                    <option value="a">WCAG A</option>
-                    <option value="aa" selected>WCAG AA</option>
-                    <option value="aaa">WCAG AAA</option>
+                    <option value="a"{{ settings.defaultLevel == 'a' ? ' selected' }}>WCAG A</option>
+                    <option value="aa"{{ settings.defaultLevel == 'aa' ? ' selected' }}>WCAG AA</option>
+                    <option value="aaa"{{ settings.defaultLevel == 'aaa' ? ' selected' }}>WCAG AAA</option>
                 </select>
                 <select data-nightingale-scope class="nightingale-widget__select">
-                    <option value="main">Content area</option>
-                    <option value="document">Whole page</option>
+                    <option value="main">{{ 'Content area'|t('nightingale') }}</option>
+                    <option value="document">{{ 'Whole page'|t('nightingale') }}</option>
+                </select>
+                <select data-nightingale-viewport class="nightingale-widget__select">
+                    <option value="desktop"{{ settings.defaultViewport == 'desktop' ? ' selected' }}>{{ 'Desktop'|t('nightingale') }}</option>
+                    <option value="mobile"{{ settings.defaultViewport == 'mobile' ? ' selected' }}>{{ 'Mobile'|t('nightingale') }}</option>
                 </select>
                 <label class="nightingale-widget__bp">
-                    <input type="checkbox" data-nightingale-best-practices checked>
-                    Best practices
+                    <input type="checkbox" data-nightingale-best-practices{{ settings.defaultBestPractices ? ' checked' }}>
+                    {{ 'Best practices'|t('nightingale') }}
                 </label>
             </div>
             <button type="button"
                     class="btn small"
                     data-nightingale-run>
-                Run Nightingale
+                {{ 'Run Nightingale'|t('nightingale') }}
             </button>
+            {% if summary %}
+                <p class="nightingale-widget__last" data-nightingale-last>
+                    {% if summary.isClean %}
+                        {{ 'Last run: no issues'|t('nightingale') }}
+                    {% else %}
+                        {{ 'Last run: {n} issue(s)'|t('nightingale', { n: summary.violations }) }}
+                    {% endif %}
+                </p>
+            {% endif %}
         </div>
     </div>
 </fieldset>

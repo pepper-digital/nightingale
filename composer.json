@@ -12,10 +12,21 @@
     "require": {
         "craftcms/cms": "^5.0.0"
     },
+    "require-dev": {
+        "craftcms/ecs": "*",
+        "craftcms/phpstan": "*",
+        "phpstan/phpstan": "*",
+        "roave/security-advisories": "dev-latest"
+    },
     "autoload": {
         "psr-4": {
             "pepperdigital\\nightingale\\": "src/"
         }
+    },
+    "scripts": {
+        "check-cs": "ecs check --ansi",
+        "fix-cs": "ecs check --ansi --fix",
+        "phpstan": "phpstan analyse --memory-limit=512M"
     },
     "extra": {
         "class": "pepperdigital\\nightingale\\Nightingale",

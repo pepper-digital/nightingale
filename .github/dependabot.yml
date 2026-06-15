@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # Watches axe-core. When a new release ships, Dependabot opens a PR bumping the
+  # pin in package.json. The PR is a notification — it does NOT rebuild the
+  # committed blob. To take an update: pull the branch, run
+  #   npm install && npm run build:axe
+  # then commit the regenerated src/web/assets/js/axe.min.js and smoke-test one page.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "axe"
+    labels:
+      - "dependencies"
+
+  # Keep GitHub Actions workflows current too.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"

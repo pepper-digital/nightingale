@@ -1,0 +1,61 @@
+{% import '_includes/forms.twig' as forms %}
+
+{% set entryTypeOptions = [] %}
+{% for entryType in entryTypes %}
+    {% set entryTypeOptions = entryTypeOptions|merge([{ label: entryType.name, value: entryType.uid }]) %}
+{% endfor %}
+
+{{ forms.checkboxSelectField({
+    label: 'Show Nightingale on these entry types'|t('nightingale'),
+    instructions: 'Choose which kinds of entry get the "Run Nightingale" button in the sidebar. Leave a type unticked if it doesn\'t need accessibility checks.'|t('nightingale'),
+    id: 'enabledEntryTypes',
+    name: 'enabledEntryTypes',
+    options: entryTypeOptions,
+    values: settings.enabledEntryTypes,
+    showAllOption: false,
+}) }}
+
+<hr>
+
+{{ forms.textField({
+    label: 'Content area selector'|t('nightingale'),
+    instructions: 'Which part of the page to check by default. Nightingale looks for this and ignores the shared header, navigation and footer so editors only see issues inside the page content. If it can\'t find a match, it checks the whole page instead.\n\nYou can override this per template by adding a `data-nightingale` attribute to the wrapping element, and exclude any region (like a sidebar) with `data-nightingale-ignore`.'|t('nightingale'),
+    id: 'contentSelector',
+    name: 'contentSelector',
+    value: settings.contentSelector,
+    placeholder: 'main',
+    required: true,
+}) }}
+
+{{ forms.selectField({
+    label: 'Default conformance level'|t('nightingale'),
+    instructions: 'Which set of accessibility standards to check against by default. AA is the level most organisations are expected to meet.'|t('nightingale'),
+    id: 'defaultLevel',
+    name: 'defaultLevel',
+    options: [
+        { label: 'WCAG A'|t('nightingale'), value: 'a' },
+        { label: 'WCAG AA'|t('nightingale'), value: 'aa' },
+        { label: 'WCAG AAA'|t('nightingale'), value: 'aaa' },
+    ],
+    value: settings.defaultLevel,
+}) }}
+
+{{ forms.selectField({
+    label: 'Default screen size'|t('nightingale'),
+    instructions: 'The screen size the page is checked at by default. Some issues — like text that doesn\'t reflow or tap targets that are too small — only show up on smaller screens.'|t('nightingale'),
+    id: 'defaultViewport',
+    name: 'defaultViewport',
+    options: [
+        { label: 'Desktop'|t('nightingale'), value: 'desktop' },
+        { label: 'Mobile'|t('nightingale'), value: 'mobile' },
+    ],
+    value: settings.defaultViewport,
+}) }}
+
+{{ forms.lightswitchField({
+    label: 'Include best-practice checks by default'|t('nightingale'),
+    instructions: 'Adds extra recommendations that go beyond the official standard — good habits worth following, but not strictly required to pass.'|t('nightingale'),
+    id: 'defaultBestPractices',
+    name: 'defaultBestPractices',
+    on: settings.defaultBestPractices,
+}) }}
